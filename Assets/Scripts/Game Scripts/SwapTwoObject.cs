@@ -59,14 +59,14 @@ public class SwapTwoObject : MonoBehaviour
 		//burst checking
 		ColumnManager columnManager = ColumnManager.instance;
 		columnManager.Swipe(item1, item2);
+		swappingItems[0] = item1;
+		swappingItems[1] = item2;
+
 		//TODO:
-		List<BurstEvent> burstEvents = columnManager.checkBurst(true);
+		List<BurstEvent> burstEvents = columnManager.checkBurst(true, swappingItems);
 		if (burstEvents.Count > 0) {
 			GameOperations.instance.StopShowingHint();
 			GameOperations.instance.Invoke("AssignNeighbours", .1f);
-
-			swappingItems[0] = item1;
-			swappingItems[1] = item2;
 
 //			foreach (BurstEvent burstEvent in burstEvents) {
 //				foreach (PlayingObject po in burstEvent.affectedObjects) {
@@ -74,6 +74,8 @@ public class SwapTwoObject : MonoBehaviour
 //				}
 //			}
 		} else {
+			swappingItems[0] = null;
+			swappingItems[1] = null;
 			//revert the swap
 			columnManager.Swipe(item1, item2);
 			Invoke("ChangePositionBack", GameManager.instance.swappingTime);
