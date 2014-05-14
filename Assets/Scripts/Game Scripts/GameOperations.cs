@@ -108,7 +108,7 @@ public class GameOperations : MonoBehaviour
 						po.specialObjectToForm = GameManager.instance.universalPlayingObjectPrefab;
 						break;
 					case ObjectType.Bomb:
-						po.specialObjectToForm = GameManager.instance.bombPlayingObjectPrefab;
+						po.specialObjectToForm = po.bombPowerPrefab;
 						break;
 					}
 					

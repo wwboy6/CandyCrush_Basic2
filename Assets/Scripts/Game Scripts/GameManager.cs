@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] playingObjectPrefabs;
     public GameObject[] horizontalPrefabs;
     public GameObject[] verticalPrefabs;
-	public GameObject bombPlayingObjectPrefab;
+	public GameObject[] bombPlayingObjectPrefab;
     public GameObject universalPlayingObjectPrefab;
     public GameObject []jellyPrefab;
 

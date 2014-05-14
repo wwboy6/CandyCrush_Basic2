@@ -159,6 +159,10 @@ public class ColumnScript : MonoBehaviour
             }
             else if (itemAvailability[i] == 3)
                 objectPrefab = GameManager.instance.universalPlayingObjectPrefab;
+			else if (itemAvailability[i] == 4)
+			{
+				objectPrefab = GameManager.instance.bombPlayingObjectPrefab[Random.Range(0, GameManager.instance.bombPlayingObjectPrefab.Length)];
+			}
             else
                 objectPrefab = GameManager.instance.playingObjectPrefabs[index];
 
