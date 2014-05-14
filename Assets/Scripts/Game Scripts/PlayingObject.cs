@@ -254,7 +254,7 @@ public class PlayingObject : MonoBehaviour
 
     internal void AssignBurst(string who)
     {
-		Debug.Log ("AssignBurst");
+//		Debug.Log ("AssignBurst");
         if (brust)
             return;
 
