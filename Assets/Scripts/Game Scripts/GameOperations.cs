@@ -194,6 +194,10 @@ public class GameOperations : MonoBehaviour
 
 			Application.LoadLevel(Application.loadedLevel);            
         }        
+		//debug
+//		else {
+//			Application.LoadLevel(Application.loadedLevel);
+//		}
     }
 
 

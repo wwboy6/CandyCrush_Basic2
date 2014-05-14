@@ -17,14 +17,14 @@ public class ColumnManager : MonoBehaviour
 
 	//TODO:debug
 	public static int[][] debug_colorMap = new int[][] {
-		new int[] {0, 1, 2, 3, 4},
-		new int[] {1, 2, 3, 4, 5},
-		new int[] {2, 3, 4, 5, 0},
-		new int[] {3, 4, 5, 0, 1},
-		new int[] {4, 5, 0, 1, 2},
-		new int[] {5, 0, 3, 2, 3},
-		new int[] {0, 1, 2, 3, 4},
-		new int[] {1, 2, 3, 4, 5}
+		new int[] {1, 4, 2, 1, 3},
+		new int[] {0, 2, 1, 0, 1},
+		new int[] {0, 1, 0, 1, 0},
+		new int[] {3, 4, 5, 1, 3},
+		new int[] {3, 1, 3, 2, 2},
+		new int[] {1, 0, 0, 3, 5},
+		new int[] {5, 5, 5, 1, 3},
+		new int[] {4, 3, 1, 2, 0}
 	};
 	
 	void Start () 
@@ -72,22 +72,38 @@ public class ColumnManager : MonoBehaviour
         }
 
 		//TODO:debug
-		if (GameOperations.debug) {
+//		if (GameOperations.debug) {
+//
+//			for (int col=0; col<numberOfColumns; ++col) {
+//				gameColumns[col].PopulateInitialColumn(debug_colorMap[col]);
+//			}
+//
+//			return;
+//		}
 
-			for (int col=0; col<numberOfColumns; ++col) {
-				gameColumns[col].PopulateInitialColumn(debug_colorMap[col]);
-			}
-
-			return;
-		}
+		string testStr = "";
 
 		//generate color indexes
 		int[][] indexMap = new int[numberOfColumns][];
 		for (int col=0; col<numberOfColumns; ++col) {
 			indexMap[col] = new int[LevelStructure.instance.numberOfRows];
 			for (int row=0; row<LevelStructure.instance.numberOfRows; ++row) {
+				//TODO:debug
+				bool first = true;
+
 				for (;;) {
+
 					int index = Random.Range(0, 6);
+
+					//TODO:debug
+					if (GameOperations.debug) {
+						if (first) {
+							index = debug_colorMap[col][row];
+
+							first = false;
+						}
+					}
+
 					indexMap[col][row] = index;
 
 					//deep first search from new color index
@@ -101,9 +117,11 @@ public class ColumnManager : MonoBehaviour
 					    row < LevelStructure.instance.numberOfRows-1 && indexMap[col-1][row+1] == index))
 						||
 						(row > 0 && indexMap[col][row-1] == index
-					 && (row > 2 && indexMap[col][row-2] == index ||
+					 && (row > 1 && indexMap[col][row-2] == index ||
 					    col > 0 && indexMap[col-1][row-1] == index))
 						) {
+
+						Debug.Log ("detected!! "+col+" "+row);
 
 						//color group detected, continue for rand another
 						continue;
@@ -114,8 +132,11 @@ public class ColumnManager : MonoBehaviour
 			}
 
 			gameColumns[col].PopulateInitialColumn(indexMap[col]);
+
+			testStr += "new int[] {"+indexMap[col][0]+", "+indexMap[col][1]+", "+indexMap[col][2]+", "+indexMap[col][3]+", "+indexMap[col][4]+"},\n";
 		}
 
+		Debug.Log (testStr);
 	
 	}
 
