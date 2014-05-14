@@ -69,10 +69,7 @@ public class GameOperations : MonoBehaviour
 		List<BurstEvent> burstEvents = columnManager.checkBurst();
 		foreach (BurstEvent burstEvent in burstEvents) {
 			foreach (PlayingObject po in burstEvent.affectedObjects) {
-				if (po != SwapTwoObject.swappingItems[0] && po != SwapTwoObject.swappingItems[1]) {
-					//TODO: check affectingObject for special burst animation
-					po.AssignBurst("normal");
-				} else {
+				if (po == SwapTwoObject.swappingItems[0] || po == SwapTwoObject.swappingItems[1]) {
 					//classify the burst pattern
 					ObjectType type = ObjectType.None;
 
@@ -115,9 +112,10 @@ public class GameOperations : MonoBehaviour
 						break;
 					}
 					
-					po.AssignBurst("normal");
-					
 				}
+
+				//TODO: check affectingObject for special burst animation
+				po.AssignBurst("normal");
 			}
 		}
 
