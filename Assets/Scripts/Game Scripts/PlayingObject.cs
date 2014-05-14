@@ -20,6 +20,7 @@ public class PlayingObject : MonoBehaviour
 
     public GameObject horizontalPowerPrefab;
     public GameObject verticalPowerPrefab;
+	public GameObject bombPowerPrefab;
     internal ColumnScript myColumnScript;
     internal int indexInColumn;
     public bool isTraced = false;
@@ -118,11 +119,11 @@ public class PlayingObject : MonoBehaviour
 
 			Debug.Log("Horizontal 3 ");
 		}
-		/*else if (( objName == up1 && objName == right1) || ( objName == downright && objName == down1)  || (objName == upleft && objName == left1))
+		else if (( objName == up1 && objName == right1) || ( objName == downright && objName == down1)  || (objName == upleft && objName == left1))
 		{	
-			parentCallingScript.specialObjectToForm = GameManager.instance.bombPlayingObjectPrefab;
+			parentCallingScript.specialObjectToForm = parentCallingScript.bombPowerPrefab;
 			Debug.Log("L 3 ");
-		}*/
+		}
     }
 
     void AssignLRUD()
@@ -168,11 +169,10 @@ public class PlayingObject : MonoBehaviour
         if (adjacentItems[2])
         {
             up1 = adjacentItems[2].name;
-		/*	if (adjacentItems[2].adjacentItems[0]){
+
+			if (adjacentItems[2].adjacentItems[0])
 				upleft = adjacentItems[2].adjacentItems[0].name;
-			}
-			else 
-			*/
+
 			if (adjacentItems[2].adjacentItems[2])
 			{
                 up2 = adjacentItems[2].adjacentItems[2].name;
@@ -184,11 +184,10 @@ public class PlayingObject : MonoBehaviour
         if (adjacentItems[3])
         {
             down1 = adjacentItems[3].name;
-			/*if (adjacentItems[3].adjacentItems[1])
-			{
+
+			if (adjacentItems[3].adjacentItems[1])
 				downright = adjacentItems[3].adjacentItems[1].name;
-			}
-			else */
+
 			if (adjacentItems[3].adjacentItems[3])
             {
                 down2 = adjacentItems[3].adjacentItems[3].name;
