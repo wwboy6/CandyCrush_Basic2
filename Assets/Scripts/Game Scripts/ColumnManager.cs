@@ -99,7 +99,7 @@ public class ColumnManager : MonoBehaviour
 	public static int successfulBurstMinCount = 3;
 
 	//returnForOne - return for any one event occurs for checking only
-	public List<BurstEvent> checkBurst(bool returnForOne = false, PlayingObject[] swappingItems) {
+	public List<BurstEvent> checkBurst(bool returnForOne = false, PlayingObject[] swappingItems = null) {
 		//TODO:debug
 		returnForOne = false;
 
@@ -108,21 +108,23 @@ public class ColumnManager : MonoBehaviour
 		//record the searched objects for minimizing the looping
 		List<PlayingObject> searchedObjects = new List<PlayingObject>();
 
-		//check if swappingItems contain universal burst object
-		for (int i=0; i<swappingItems.Length; ++i) {
-			if (swappingItems[i].objectType == ObjectType.Universal) {
-				BurstEvent e = new BurstEvent();
-				e.affectingObjects.Add(e);
-				
-				burstEvents.Add(e);
-				if (returnForOne) return burstEvents;
-				
-				for (int col = 0; col < gameColumns.Length; ++col) {
-					for (int row = 0; row < gameColumns[i].playingObjectsScriptList.Count; ++row) {
-						PlayingObject affectedObject = (PlayingObject) gameColumns[col].playingObjectsScriptList[row];
-						if (affectedObject != null && affectedObject.name == tarObject.name
-						    && !e.affectedObjects.Contains(affectedObject))
-							e.affectedObjects.Add(affectedObject);
+		if (swappingItems != null) {
+			//check if swappingItems contain universal burst object
+			for (int i=0; i<swappingItems.Length; ++i) {
+				if (swappingItems[i].objectType == ObjectType.Universal) {
+					BurstEvent e = new BurstEvent();
+					e.affectingObjects.Add(swappingItems[i]);
+					
+					burstEvents.Add(e);
+					if (returnForOne) return burstEvents;
+					
+					for (int col = 0; col < gameColumns.Length; ++col) {
+						for (int row = 0; row < gameColumns[i].playingObjectsScriptList.Count; ++row) {
+							PlayingObject affectedObject = (PlayingObject) gameColumns[col].playingObjectsScriptList[row];
+							if (affectedObject != null && affectedObject.name == swappingItems[i].name
+							    && !e.affectedObjects.Contains(affectedObject))
+								e.affectedObjects.Add(affectedObject);
+						}
 					}
 				}
 			}
