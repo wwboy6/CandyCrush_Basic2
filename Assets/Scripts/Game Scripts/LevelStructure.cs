@@ -6,7 +6,7 @@ public class LevelStructure : MonoBehaviour
     public static LevelStructure instance;
 
     internal int numberOfColumns;
-    public int numberOfRows = 5;
+    public int numberOfRows = 9;
     internal ColumnStructure[] columnStructures;
 
 
