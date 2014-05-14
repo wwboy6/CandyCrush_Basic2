@@ -16,16 +16,16 @@ public class ColumnManager : MonoBehaviour
     }
 
 	//TODO:debug
-	public static int[][] debug_colorMap = new int[][] {
-		new int[] {1, 4, 2, 1, 3},
-		new int[] {0, 2, 1, 0, 1},
-		new int[] {0, 1, 0, 1, 0},
-		new int[] {3, 4, 5, 1, 3},
-		new int[] {3, 1, 3, 2, 2},
-		new int[] {1, 0, 0, 3, 5},
-		new int[] {5, 5, 5, 1, 3},
-		new int[] {4, 3, 1, 2, 0}
-	};
+//	public static int[][] debug_colorMap = new int[][] {
+//		new int[] {1, 4, 2, 1, 3},
+//		new int[] {0, 2, 1, 0, 1},
+//		new int[] {0, 1, 0, 1, 0},
+//		new int[] {3, 4, 5, 1, 3},
+//		new int[] {3, 1, 3, 2, 2},
+//		new int[] {1, 0, 0, 3, 5},
+//		new int[] {5, 5, 5, 1, 3},
+//		new int[] {4, 3, 1, 2, 0}
+//	};
 	
 	void Start () 
     {
@@ -88,21 +88,21 @@ public class ColumnManager : MonoBehaviour
 		for (int col=0; col<numberOfColumns; ++col) {
 			indexMap[col] = new int[LevelStructure.instance.numberOfRows];
 			for (int row=0; row<LevelStructure.instance.numberOfRows; ++row) {
-				//TODO:debug
-				bool first = true;
+//				//TODO:debug
+//				bool first = true;
 
 				for (;;) {
 
 					int index = Random.Range(0, 6);
 
 					//TODO:debug
-					if (GameOperations.debug) {
-						if (first) {
-							index = debug_colorMap[col][row];
-
-							first = false;
-						}
-					}
+//					if (GameOperations.debug) {
+//						if (first) {
+//							index = debug_colorMap[col][row];
+//
+//							first = false;
+//						}
+//					}
 
 					indexMap[col][row] = index;
 
@@ -121,7 +121,7 @@ public class ColumnManager : MonoBehaviour
 					    col > 0 && indexMap[col-1][row-1] == index))
 						) {
 
-						Debug.Log ("detected!! "+col+" "+row);
+//						Debug.Log ("detected!! "+col+" "+row);
 
 						//color group detected, continue for rand another
 						continue;
@@ -133,10 +133,10 @@ public class ColumnManager : MonoBehaviour
 
 			gameColumns[col].PopulateInitialColumn(indexMap[col]);
 
-			testStr += "new int[] {"+indexMap[col][0]+", "+indexMap[col][1]+", "+indexMap[col][2]+", "+indexMap[col][3]+", "+indexMap[col][4]+"},\n";
+//			testStr += "new int[] {"+indexMap[col][0]+", "+indexMap[col][1]+", "+indexMap[col][2]+", "+indexMap[col][3]+", "+indexMap[col][4]+"},\n";
 		}
 
-		Debug.Log (testStr);
+//		Debug.Log (testStr);
 	
 	}
 
@@ -178,32 +178,28 @@ public class ColumnManager : MonoBehaviour
 	public static int successfulBurstMinCount = 3;
 
 	//returnForOne - return for any one event occurs for checking only
-	public List<BurstEvent> checkBurst(bool returnForOne = false, PlayingObject[] swappingItems = null) {
-		//TODO:debug
-		returnForOne = false;
-
+	public List<BurstEvent> checkBurst(bool returnForOne, PlayingObject[] swappingItems) {
 		List<BurstEvent> burstEvents = new List<BurstEvent>();
 
 		//record the searched objects for minimizing the looping
 		List<PlayingObject> searchedObjects = new List<PlayingObject>();
 
-		if (swappingItems != null) {
-			//check if swappingItems contain universal burst object
-			for (int i=0; i<swappingItems.Length; ++i) {
-				if (swappingItems[i].objectType == ObjectType.Universal) {
-					BurstEvent e = new BurstEvent();
-					e.affectingObjects.Add(swappingItems[i]);
-					
-					burstEvents.Add(e);
-					if (returnForOne) return burstEvents;
-					
-					for (int col = 0; col < gameColumns.Length; ++col) {
-						for (int row = 0; row < gameColumns[i].playingObjectsScriptList.Count; ++row) {
-							PlayingObject affectedObject = (PlayingObject) gameColumns[col].playingObjectsScriptList[row];
-							if (affectedObject != null && affectedObject.name == swappingItems[i].name
-							    && !e.affectedObjects.Contains(affectedObject))
-								e.affectedObjects.Add(affectedObject);
-						}
+		//check if swappingItems contain universal burst object
+		for (int i=0; i<swappingItems.Length; ++i) {
+			if (swappingItems[i] == null) continue;
+			if (swappingItems[i].objectType == ObjectType.Universal) {
+				BurstEvent e = new BurstEvent();
+				e.affectingObjects.Add(swappingItems[i]);
+				
+				burstEvents.Add(e);
+				if (returnForOne) return burstEvents;
+				
+				for (int col = 0; col < gameColumns.Length; ++col) {
+					for (int row = 0; row < gameColumns[i].playingObjectsScriptList.Count; ++row) {
+						PlayingObject affectedObject = (PlayingObject) gameColumns[col].playingObjectsScriptList[row];
+						if (affectedObject != null && affectedObject.name == swappingItems[i].name
+						    && !e.affectedObjects.Contains(affectedObject))
+							e.affectedObjects.Add(affectedObject);
 					}
 				}
 			}

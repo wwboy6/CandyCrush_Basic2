@@ -66,7 +66,7 @@ public class GameOperations : MonoBehaviour
 		Debug.Log ("CheckBoardState "+ ((SwapTwoObject.swappingItems[0]==null) ? "null" : (SwapTwoObject.swappingItems[0].name)));
 		
 		ColumnManager columnManager = ColumnManager.instance;
-		List<BurstEvent> burstEvents = columnManager.checkBurst();
+		List<BurstEvent> burstEvents = columnManager.checkBurst(false, SwapTwoObject.swappingItems);
 		foreach (BurstEvent burstEvent in burstEvents) {
 			foreach (PlayingObject po in burstEvent.affectedObjects) {
 				if (po == SwapTwoObject.swappingItems[0] || po == SwapTwoObject.swappingItems[1]) {
