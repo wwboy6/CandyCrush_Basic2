@@ -224,6 +224,7 @@ public class GameOperations : MonoBehaviour
 			for (int i = 0; i < columnManager.gameColumns[j].playingObjectsScriptList.Count - 1; i++) {
 				PlayingObject o1 = (PlayingObject) columnManager.gameColumns[j].playingObjectsScriptList[i];
 				PlayingObject o2;
+
 				//try to swap with right and bottom and see if burst is available
 				//Note: no need to check left and top
 				for (int d=0; d<2; ++d) {
@@ -232,7 +233,7 @@ public class GameOperations : MonoBehaviour
 					if (o2==null) continue;
 
 					columnManager.Swipe(o1, o2);
-					List<BurstEvent> burstEvents = columnManager.checkBurst(true);
+					List<BurstEvent> burstEvents = columnManager.checkBurst(true, new PlayingObject[]{o1,o2});
 					columnManager.Swipe(o1, o2);
 
 					if (burstEvents.Count > 0) {
