@@ -25,18 +25,9 @@ public class ColumnScript : MonoBehaviour
 	
 	void Start () 
     {
-        numberOfRows = LevelStructure.instance.numberOfRows;
-
-        playingObjectsScriptList = new ArrayList();
-        jellyObjects = new ArrayList();
-
-        itemAvailability = LevelStructure.instance.columnStructures[columnIndex].itemAvailability;
-
-        if(LevelStructure.instance.columnStructures[columnIndex].jelly.Length > 0)
-            jellyAvailability = LevelStructure.instance.columnStructures[columnIndex].jelly;
 
 
-        Invoke("PopulateInitialColumn", .2f);
+//        Invoke("PopulateInitialColumn", .2f);
 
         InvokeRepeating("UpdateList", 1, 1);
 
@@ -103,18 +94,27 @@ public class ColumnScript : MonoBehaviour
     }
 	
 	//TODO:debug
-	static int[,] indexMap = new int[,]{
-		{0,1,2,3,4,5,0,1},
-		{5,0,1,2,3,4,5,0},
-		{4,5,0,1,2,3,4,5},
-		{3,4,5,0,1,2,3,4},
-		{2,3,4,5,0,1,2,4}
-	};
+//	static int[,] indexMap = new int[,]{
+//		{0,1,2,3,4,5,0,1},
+//		{5,0,1,2,3,4,5,0},
+//		{4,5,0,1,2,3,4,5},
+//		{3,4,5,0,1,2,3,4},
+//		{2,3,4,5,0,1,2,4}
+//	};
 
-    void PopulateInitialColumn()
-    {        
-
-        for (int i = 0; i < itemAvailability.Length; i++)
+    public void PopulateInitialColumn(int[] indexes)
+	{
+		numberOfRows = LevelStructure.instance.numberOfRows;
+		
+		playingObjectsScriptList = new ArrayList();
+		jellyObjects = new ArrayList();
+		
+		itemAvailability = LevelStructure.instance.columnStructures[columnIndex].itemAvailability;
+		
+		if(LevelStructure.instance.columnStructures[columnIndex].jelly.Length > 0)
+			jellyAvailability = LevelStructure.instance.columnStructures[columnIndex].jelly;
+		
+		for (int i = 0; i < itemAvailability.Length; i++)
         {
             
             if (itemAvailability[i] >= 1)
@@ -135,13 +135,14 @@ public class ColumnScript : MonoBehaviour
             }
             
 
-            int index = Random.Range(0, 6);
+//            int index = Random.Range(0, 6);
+			int index = indexes[i];
 
 			//TODO:debug
-			if (GameOperations.debug) {
-				itemAvailability[i] = 1;
-				index = indexMap[i, columnIndex];
-			}
+//			if (GameOperations.debug) {
+//				itemAvailability[i] = 1;
+//				index = indexMap[i, columnIndex];
+//			}
 
             GameObject objectPrefab;
 
@@ -284,6 +285,8 @@ public class ColumnScript : MonoBehaviour
 
     internal void AddMissingItems()
     {
+		Debug.Log ("AddMissingItems");
+
         numberOfItemsToAdd = numberOfRows - playingObjectsScriptList.Count;
         if (numberOfItemsToAdd == 0)
             return;

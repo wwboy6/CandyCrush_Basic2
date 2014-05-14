@@ -58,6 +58,43 @@ public class ColumnManager : MonoBehaviour
         {
             gameColumns[i] = temp[i];
         }
+
+
+		//generate color indexes
+		int[][] indexMap = new int[numberOfColumns][];
+		for (int col=0; col<numberOfColumns; ++col) {
+			indexMap[col] = new int[LevelStructure.instance.numberOfRows];
+			for (int row=0; row<LevelStructure.instance.numberOfRows; ++row) {
+				for (;;) {
+					int index = Random.Range(0, 6);
+					indexMap[col][row] = index;
+
+					//deep first search from new color index
+					if (
+						(col > 0 && indexMap[col-1][row] == index &&
+					 row > 0 && indexMap[col][row-1] == index)
+						||
+						(col > 0 && indexMap[col-1][row] == index
+					 && (col > 1 && indexMap[col-2][row] == index ||
+					    row > 0 && indexMap[col-1][row-1] == index ||
+					    row < LevelStructure.instance.numberOfRows-1 && indexMap[col-1][row+1] == index))
+						||
+						(row > 0 && indexMap[col][row-1] == index
+					 && (row > 2 && indexMap[col][row-2] == index ||
+					    col > 0 && indexMap[col-1][row-1] == index))
+						) {
+
+						//color group detected, continue for rand another
+						continue;
+					}
+
+					break;
+				}
+			}
+
+			gameColumns[col].PopulateInitialColumn(indexMap[col]);
+		}
+
 	
 	}
 
