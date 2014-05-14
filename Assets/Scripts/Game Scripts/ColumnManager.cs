@@ -14,6 +14,18 @@ public class ColumnManager : MonoBehaviour
         instance = this;
         
     }
+
+	//TODO:debug
+	public static int[][] debug_colorMap = new int[][] {
+		new int[] {0, 1, 2, 3, 4},
+		new int[] {1, 2, 3, 4, 5},
+		new int[] {2, 3, 4, 5, 0},
+		new int[] {3, 4, 5, 0, 1},
+		new int[] {4, 5, 0, 1, 2},
+		new int[] {5, 0, 3, 2, 3},
+		new int[] {0, 1, 2, 3, 4},
+		new int[] {1, 2, 3, 4, 5}
+	};
 	
 	void Start () 
     {
@@ -59,6 +71,15 @@ public class ColumnManager : MonoBehaviour
             gameColumns[i] = temp[i];
         }
 
+		//TODO:debug
+		if (GameOperations.debug) {
+
+			for (int col=0; col<numberOfColumns; ++col) {
+				gameColumns[col].PopulateInitialColumn(debug_colorMap[col]);
+			}
+
+			return;
+		}
 
 		//generate color indexes
 		int[][] indexMap = new int[numberOfColumns][];
