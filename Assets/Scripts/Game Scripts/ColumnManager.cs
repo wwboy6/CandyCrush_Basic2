@@ -7,7 +7,6 @@ public class ColumnManager : MonoBehaviour
     public static ColumnManager instance;
     internal ColumnScript[] gameColumns;
     internal int numberOfColumns;
-    
 
     void Awake()
     {
@@ -294,6 +293,7 @@ public class ColumnManager : MonoBehaviour
 						//add the affected objects
 						//TODO: specify which effect is applied on every affected objects
 
+
 						foreach (PlayingObject tarObject in e.affectingObjects) {
 							if (!e.affectedObjects.Contains(tarObject)) e.affectedObjects.Add(tarObject);
 							
@@ -322,7 +322,18 @@ public class ColumnManager : MonoBehaviour
 							}
 								break;
 							case ObjectType.Bomb: {
-								//TODO:
+
+								for (int b = tarObject.indexInColumn ; b< tarObject.indexInColumn+3; ++b)
+								{
+									for (int a=0; a<3; ++a) {
+										PlayingObject affectedObject = ((PlayingObject)tarObject.myColumnScript.playingObjectsScriptList[b-1]).adjacentItems[a];
+										if (affectedObject != null && !e.affectedObjects.Contains(affectedObject))
+											e.affectedObjects.Add(affectedObject);
+										}
+
+								}
+
+
 							}
 								break;
 							}
