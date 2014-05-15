@@ -322,7 +322,6 @@ public class ColumnManager : MonoBehaviour
 							}
 								break;
 							case ObjectType.Bomb: {
-<<<<<<< HEAD
 								Vector2 tarBPos = getPosOfPlayingObject(tarObject);
 								for (int a=0; a<8; ++a) {
 									PlayingObject affectedObject = null;
@@ -339,17 +338,6 @@ public class ColumnManager : MonoBehaviour
 									 
 									if (affectedObject != null && !e.affectedObjects.Contains(affectedObject))
 										e.affectedObjects.Add(affectedObject);
-=======
-
-								for (int b = tarObject.indexInColumn ; b< tarObject.indexInColumn+3; ++b)
-								{
-									for (int a=0; a<3; ++a) {
-										PlayingObject affectedObject = ((PlayingObject)tarObject.myColumnScript.playingObjectsScriptList[b-1]).adjacentItems[a];
-										if (affectedObject != null && !e.affectedObjects.Contains(affectedObject))
-											e.affectedObjects.Add(affectedObject);
-									}
-
->>>>>>> FETCH_HEAD
 								}
 							}
 								break;
