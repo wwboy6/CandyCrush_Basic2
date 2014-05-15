@@ -322,6 +322,24 @@ public class ColumnManager : MonoBehaviour
 							}
 								break;
 							case ObjectType.Bomb: {
+<<<<<<< HEAD
+								Vector2 tarBPos = getPosOfPlayingObject(tarObject);
+								for (int a=0; a<8; ++a) {
+									PlayingObject affectedObject = null;
+									switch (a) {
+									case 0: affectedObject = getPlayingObjectOfPos((int)tarBPos.x+1, (int)tarBPos.y); break;
+									case 1: affectedObject = getPlayingObjectOfPos((int)tarBPos.x, (int)tarBPos.y+1); break;
+									case 2: affectedObject = getPlayingObjectOfPos((int)tarBPos.x-1, (int)tarBPos.y); break;
+									case 3: affectedObject = getPlayingObjectOfPos((int)tarBPos.x, (int)tarBPos.y-1); break;
+									case 4: affectedObject = getPlayingObjectOfPos((int)tarBPos.x-1, (int)tarBPos.y-1); break;
+									case 5: affectedObject = getPlayingObjectOfPos((int)tarBPos.x+1, (int)tarBPos.y+1); break;
+									case 6: affectedObject = getPlayingObjectOfPos((int)tarBPos.x-1, (int)tarBPos.y+1); break;
+									case 7: affectedObject = getPlayingObjectOfPos((int)tarBPos.x+1, (int)tarBPos.y-1); break;
+									}
+									 
+									if (affectedObject != null && !e.affectedObjects.Contains(affectedObject))
+										e.affectedObjects.Add(affectedObject);
+=======
 
 								for (int b = tarObject.indexInColumn ; b< tarObject.indexInColumn+3; ++b)
 								{
@@ -331,9 +349,8 @@ public class ColumnManager : MonoBehaviour
 											e.affectedObjects.Add(affectedObject);
 									}
 
+>>>>>>> FETCH_HEAD
 								}
-
-
 							}
 								break;
 							}
