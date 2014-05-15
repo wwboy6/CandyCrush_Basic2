@@ -74,16 +74,22 @@ public class GameOperations : MonoBehaviour
 					ObjectType type = ObjectType.None;
 
 					Vector2 position = columnManager.getPosOfPlayingObject(po);
+
 					foreach (PlayingObject po2 in burstEvent.affectingObjects) {
+						if (po2 == po) continue;
 						Vector2 position2 = columnManager.getPosOfPlayingObject(po2);
+
 						if (position.x != position2.x && position.y != position2.y) {
+							Debug.Log ("B "+position+" "+position2);
 							type = ObjectType.Bomb;		//false checking for both x and y => not a straight line
 							break;
 						}
 						if (position.x != position2.x) {
+							Debug.Log ("X "+position+" "+position2);
 							type = ObjectType.Horizontal;
 							position.x = -1;	//force false checking for x and focus on y
 						} else {
+							Debug.Log ("Y "+position+" "+position2);
 							type = ObjectType.Vertical;
 							position.y = -1;	//force false checking for y and focus on x
 						}

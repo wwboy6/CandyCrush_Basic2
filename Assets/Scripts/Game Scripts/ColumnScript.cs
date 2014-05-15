@@ -211,6 +211,7 @@ public class ColumnScript : MonoBehaviour
 
     internal void ChangeItem(int index, GameObject newItemPrefab,string _name)
     {
+		Debug.Log ("ChangeItem "+newItemPrefab.name);
         GameObject temp = (GameObject)Instantiate(newItemPrefab, Vector3.zero, Quaternion.identity);
         temp.GetComponent<PlayingObject>().myColumnScript = this;
         temp.GetComponent<PlayingObject>().indexInColumn = index;

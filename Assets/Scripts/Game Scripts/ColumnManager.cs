@@ -270,14 +270,14 @@ public class ColumnManager : MonoBehaviour
 						} // for (adjIndex)
 					} // while (searchIndex)
 
-					//TODO:debug use
-//					if (e.affectingObjects.Count > 1) {
-//						string testStr = "group:\n";
-//						foreach (PlayingObject tarObject in e.affectingObjects) {
-//							testStr += getPosOfPlayingObject(tarObject) + "\n";
-//						}
-//						Debug.Log(testStr);
-//					}
+//					TODO:debug use
+					if (e.affectingObjects.Count > 2) {
+						string testStr = "group:\n";
+						foreach (PlayingObject tarObject in e.affectingObjects) {
+							testStr += getPosOfPlayingObject(tarObject) + "\n";
+						}
+						Debug.Log(testStr);
+					}
 
 					//check if that's a successful burst
 
@@ -329,7 +329,7 @@ public class ColumnManager : MonoBehaviour
 										PlayingObject affectedObject = ((PlayingObject)tarObject.myColumnScript.playingObjectsScriptList[b-1]).adjacentItems[a];
 										if (affectedObject != null && !e.affectedObjects.Contains(affectedObject))
 											e.affectedObjects.Add(affectedObject);
-										}
+									}
 
 								}
 

@@ -33,6 +33,8 @@ public class SpecialPlayingObject : MonoBehaviour
 
     internal void AssignBrustToItsTarget()
     {
+		Debug.Log ("AssignBrustToItsTarget");
+
         myPlayingObject.brust = true;
 
         if (myPlayingObject.objectType == ObjectType.Horizontal)
@@ -45,6 +47,7 @@ public class SpecialPlayingObject : MonoBehaviour
 
     void PowerIsVertical()
     {
+		Debug.Log ("PowerIsVertical");
         int itemIndex = myPlayingObject.indexInColumn;
 
         for (int i = 0; i < myPlayingObject.myColumnScript.playingObjectsScriptList.Count; i++)
@@ -63,6 +66,7 @@ public class SpecialPlayingObject : MonoBehaviour
 
     void PowerIsHorizontal()
     {
+		Debug.Log ("PowerIsHorizontal");
         int itemIndex = myPlayingObject.indexInColumn;
 
         for (int i = 0; i < ColumnManager.instance.gameColumns.Length; i++)
