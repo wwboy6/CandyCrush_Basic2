@@ -271,13 +271,13 @@ public class ColumnManager : MonoBehaviour
 					} // while (searchIndex)
 
 //					TODO:debug use
-					if (e.affectingObjects.Count > 2) {
-						string testStr = "group:\n";
-						foreach (PlayingObject tarObject in e.affectingObjects) {
-							testStr += getPosOfPlayingObject(tarObject) + "\n";
-						}
-						Debug.Log(testStr);
-					}
+//					if (e.affectingObjects.Count > 2) {
+//						string testStr = "group:\n";
+//						foreach (PlayingObject tarObject in e.affectingObjects) {
+//							testStr += getPosOfPlayingObject(tarObject) + "\n";
+//						}
+//						Debug.Log(testStr);
+//					}
 
 					//check if that's a successful burst
 
